@@ -5,7 +5,7 @@ import router from './router'
 import store from '@/store'
 import i18n from '@/i18n'
 import VueClipboard from 'vue-clipboard2'
-import VueAnalytics from 'vue-analytics'
+import VueGtag from 'vue-gtag'
 import { GOOGLE_ANALYTICS_ID } from '@/utils/constants'
 
 import iView from 'iview'
@@ -45,10 +45,10 @@ Vue.use(iView, {
 Vue.use(VueClipboard)
 Vue.use(highlight)
 Vue.use(katex)
-Vue.use(VueAnalytics, {
-  id: GOOGLE_ANALYTICS_ID,
-  router
-})
+Vue.use(VueGtag, {
+  config: { id: GOOGLE_ANALYTICS_ID },
+  enabled: true
+}, router)
 
 Vue.component('ECharts', ECharts)
 Vue.component(VerticalMenu.name, VerticalMenu)
