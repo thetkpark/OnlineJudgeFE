@@ -1,0 +1,29 @@
+name: build
+
+on:
+  push:
+    branches:
+      - 'master'
+      
+env:
+  USE_SENTRY: 0
+  CXX: g++-4.8
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2.5.2
+      with:
+        node-version: "8.12.0"
+    - name: Install Dependencies
+      run: npm install
+    - name: Build DLL
+      run: npm run build:dll
+    - name: Build       
+      run: npm run build
+    - name: Prep
+      run: find dist/ -type f -name "*.map" -delete
+    - name: Zip Dist
+      run: zip -r dist.zip dist
