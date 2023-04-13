@@ -28,16 +28,6 @@ jobs:
       run: find dist/ -type f -name "*.map" -delete
     - name: Zip Dist
       run: zip -r dist.zip dist
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@latest
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
